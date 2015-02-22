@@ -15,7 +15,7 @@ import sys
 from time import time
 sys.path.append("../tools/")
 from email_preprocess import preprocess
-
+from sklearn.naive_bayes import GaussianNB
 
 ### features_train and features_test are the features for the training
 ### and testing datasets, respectively
@@ -26,8 +26,10 @@ features_train, features_test, labels_train, labels_test = preprocess()
 
 
 #########################################################
-### your code goes here ###
-
+gnb = GaussianNB()
+y_pred = gnb.fit(features_train, labels_train).predict(features_test)
+print("Number of mislabeled points out of a total %d points : %d"
+     % (features_test.shape[0],(labels_test != y_pred).sum()))
 
 #########################################################
 

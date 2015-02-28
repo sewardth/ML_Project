@@ -26,4 +26,6 @@ print len([x for x in enron_data if enron_data[x]['salary']!= 'NaN'])
 print len([x for x in enron_data if enron_data[x]['email_address']!= 'NaN'])
 print len([x for x in enron_data if enron_data[x]['total_payments']== 'NaN'])#/float(len(enron_data))
 print len([x for x in enron_data if enron_data[x]['poi'] ==True])
+print len([x for x in enron_data if enron_data[x]['poi'] ==True])
+
 print len(enron_data)

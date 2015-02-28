@@ -32,14 +32,20 @@ feature_train, feature_test, target_train, target_test = train_test_split(featur
 train_color = "b"
 test_color = "r"
 
+from sklearn import linear_model
 
 
 ### your regression goes here!
 ### please name it reg, so that the plotting code below picks it up and 
 ### plots it correctly
 
-
-
+reg = linear_model.LinearRegression()
+reg.fit(feature_train,target_train)
+reg.predict(feature_test)
+print 'slope = ' +str(reg.coef_)
+print 'intercept = '+ str(reg.intercept_)
+print 'training score =' + str(reg.score(feature_train, target_train))
+print 'test score =' + str(reg.score(feature_test, target_test))
 
 
 
@@ -64,6 +70,15 @@ try:
     plt.plot( feature_test, reg.predict(feature_test) )
 except NameError:
     pass
+
+print '################## Without Outliers ################'
+reg.fit(feature_test, target_test)
+plt.plot(feature_train, reg.predict(feature_train), color="r") 
+print 'slope = ' +str(reg.coef_)
+print 'intercept = '+ str(reg.intercept_)
+print 'training score =' + str(reg.score(feature_train, target_train))
+print 'test score =' + str(reg.score(feature_test, target_test))
+
 plt.xlabel(features_list[1])
 plt.ylabel(features_list[0])
 plt.legend()

@@ -20,3 +20,10 @@ import pickle
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r"))
 
 
+print enron_data['SKILLING JEFFREY K']
+print [x +'-'+str(enron_data[x]['total_payments']) for x in enron_data if x in ['SKILLING JEFFREY K','LAY KENNETH L','FASTOW ANDREW S']]
+print len([x for x in enron_data if enron_data[x]['salary']!= 'NaN'])
+print len([x for x in enron_data if enron_data[x]['email_address']!= 'NaN'])
+print len([x for x in enron_data if enron_data[x]['total_payments']== 'NaN'])#/float(len(enron_data))
+print len([x for x in enron_data if enron_data[x]['poi'] ==True])
+print len(enron_data)

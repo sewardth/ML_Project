@@ -90,6 +90,7 @@ pickle.dump( from_data, open("your_email_authors.pkl", "w") )
 
 vectorizer = TfidfVectorizer(stop_words="english")
 vectorizer.fit_transform(word_data)
+print word_data[100]
 
 print "#feature names: ", len(vectorizer.get_feature_names())
 

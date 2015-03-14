@@ -3,11 +3,13 @@
 import pickle
 import numpy
 numpy.random.seed(42)
+from sklearn import tree
+from sklearn.metrics import accuracy_score
 
 
 ### the words (features) and authors (labels), already largely processed
-words_file = "word_data_overfit.pkl" ### like the file you made in the last mini-project 
-authors_file = "email_authors_overfit.pkl"  ### this too
+words_file = "../text_learning/your_word_data.pkl" ### like the file you made in the last mini-project 
+authors_file = "../text_learning/your_email_authors.pkl"  ### this too
 word_data = pickle.load( open(words_file, "r"))
 authors = pickle.load( open(authors_file, "r") )
 
@@ -22,6 +24,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5,
                              stop_words='english')
 features_train = vectorizer.fit_transform(features_train).toarray()
+#print vectorizer.get_feature_names()[14342]
 features_test  = vectorizer.transform(features_test).toarray()
 
 
@@ -35,5 +38,14 @@ labels_train   = labels_train[:150]
 
 ### your code goes here
 
+clf = tree.DecisionTreeClassifier()
+clf.fit(features_train,labels_train)
+prediction = clf.predict(features_test)
 
+score = accuracy_score(labels_test, prediction)
+print score
+important=[]
+for index, score in enumerate(clf.feature_importances_):
+	if score > .2: important.append((index,score))
 
+print len(important)
